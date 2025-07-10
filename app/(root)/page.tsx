@@ -1,6 +1,6 @@
 import { APP_NAME } from "@/lib/constants";
 
-export default function Home() {
+const Home = () => {
   return (
     <>
       <h2>Welcome to {APP_NAME}</h2>
@@ -82,4 +82,6 @@ export default function Home() {
       </ul>
     </>
   );
-}
+};
+
+export default Home;
