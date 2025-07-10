@@ -1,7 +1,12 @@
-<h2>Welcome to ProStore</h2>
+import { APP_NAME } from "@/lib/constants";
+
+export default function Home() {
+  return (
+    <>
+      <h2>Welcome to {APP_NAME}</h2>
       <p>A site brought to you by</p>
       <ul>
-        <li>
+        <li className="no-underline">
           <a
             href="https://nextjs.org"
             target="_blank"
@@ -75,3 +80,6 @@
           </a>
         </li>
       </ul>
+    </>
+  );
+}
