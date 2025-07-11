@@ -6,7 +6,6 @@ import Menu from "./menu";
 const Header = () => {
   return (
     <header className="w-full border-b">
-      <Menu />
       <div className="wrapper flex-between">
         <div className="flex-start">
           <Link href="/" className="flex-start">
@@ -22,6 +21,7 @@ const Header = () => {
             </span>
           </Link>
         </div>
+        <Menu />
       </div>
     </header>
   );

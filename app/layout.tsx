@@ -25,7 +25,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} antialiased`}>
-        <p>HTML & BODY TAGS APP-LAYOUT.JSX</p>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
