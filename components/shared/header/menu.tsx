@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { APP_NAME } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -13,8 +12,7 @@ import { EllipsisVertical, ShoppingCart, UserIcon } from "lucide-react";
 
 const Menu = () => {
   return (
-    <div className="flex justify-end gap-3">
-      <h2>{APP_NAME}</h2>
+    <div className="flex justify-end">
       <nav className="hidden md:flex w-full max-w-xs gap-1">
         <ModeToggle />
         <Button asChild variant="ghost">
