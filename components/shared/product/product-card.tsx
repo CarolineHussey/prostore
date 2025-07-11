@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import ProductPrice from "./product-price";
 
-const ProductCard = ({ product, key }: { product: any; key: any }) => {
+const ProductCard = ({ product }: { product: any }) => {
   return (
     <Card className="w-full max-w-sm">
       <CardHeader className="p-0 items-center">
