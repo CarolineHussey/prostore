@@ -5,8 +5,9 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../lib/generated/prisma"
+  provider        = "prisma-client-js"
+  // output   = "../lib/generated/prisma"
+  previewFeatures = ["driverAdapters"] // An adapter so Prisma works smoothly with Neon in serverless environments `npm install @prisma/adapter-neon`
 }
 
 datasource db {
