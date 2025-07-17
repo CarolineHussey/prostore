@@ -1,7 +1,7 @@
 "use server";
 import { LATEST_PRODUCTS_LIMIT } from "../constants";
 //import { PrismaClient } from "../generated/prisma";
-import { convertToPlainObject } from "../utils";
+import { convertToPlainObject } from "../utils"; // Utility function to convert Prisma objects to plain JS objects
 import { prisma } from "../../db/prisma";
 
 //get latest products
@@ -10,7 +10,7 @@ export async function getLatestProducts() {
   try {
     const data = await prisma.product.findMany({
       orderBy: { createdAt: "desc" },
-      take: LATEST_PRODUCTS_LIMIT,
+      take: LATEST_PRODUCTS_LIMIT, // Limit the number of products returned
     });
     return convertToPlainObject(data);
   } catch (error) {

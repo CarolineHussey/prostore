@@ -6,7 +6,8 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 //convert prisma object to javascript object
-export function convertToPlainObject<T>(value: T) {
+//<T> is a generic type that allows the function to accept any type of object. The return type (: T) is also the same type as the input (value: T), ensuring type safety.
+export function convertToPlainObject<T>(value: T): T {
   return JSON.parse(JSON.stringify(value));
 }
 
