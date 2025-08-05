@@ -20,3 +20,18 @@ export async function getLatestProducts() {
     await prisma.$disconnect();
   }
 }
+
+//get single product by slug
+export async function getSingleProductBySlug(slug: string) {
+  //const prisma = new PrismaClient();
+  try {
+    return await prisma.product.findFirst({
+      where: { slug: slug },
+    });
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    throw error;
+  } finally {
+    await prisma.$disconnect();
+  }
+}

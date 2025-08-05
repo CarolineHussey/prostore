@@ -8,7 +8,7 @@ const ProductCard = ({ product }: { product: Product }) => {
   return (
     <Card className="w-full max-w-sm">
       <CardHeader className="p-0 items-center">
-        <Link href={`/products/${product.slug}`}>
+        <Link href={`/product/${product.slug}`}>
           <Image
             src={product.images[0]}
             alt={product.name}
@@ -26,7 +26,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         <div className="flex-between gap-4">
           <p>{product.rating} Stars</p>
           {product.stock > 0 ? (
-            <ProductPrice value={Number(product.price)} />
+            <ProductPrice price={Number(product.price)} />
           ) : (
             <p className="text-destructive">Out of Stock</p>
           )}

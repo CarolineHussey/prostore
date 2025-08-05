@@ -5,6 +5,7 @@ async function main() {
   const prisma = new PrismaClient();
   // Clear existing data
   await prisma.product.deleteMany();
+  // Seed with sample data
   await prisma.product.createMany({
     data: sampleData.products,
   });
