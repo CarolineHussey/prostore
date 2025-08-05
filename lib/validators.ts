@@ -4,7 +4,7 @@ import { formatNumberWithDecimal } from "@/lib/utils";
 const currency = z
   .string()
   .refine(
-    (value) => /^\d+(\\.d{2})?£/.test(formatNumberWithDecimal(Number(value))),
+    (value) => /^\d+(\.\d{2})?$/.test(formatNumberWithDecimal(Number(value))),
     "Price must have at least two decimal places"
   );
 
