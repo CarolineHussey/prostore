@@ -1,7 +1,7 @@
 /*This file was provided with course materials and modified to work with the latest version of Prisma (6.11.1) */
 import { neonConfig } from "@neondatabase/serverless";
 import { PrismaNeon } from "@prisma/adapter-neon";
-import { PrismaClient, Product } from "../db/prisma/client";
+import { PrismaClient } from "../db/prisma/client";
 
 import ws from "ws";
 
