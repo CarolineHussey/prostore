@@ -16,8 +16,6 @@ export async function getLatestProducts() {
   } catch (error) {
     console.error("Error fetching latest products:", error);
     throw error;
-  } finally {
-    await prisma.$disconnect();
   }
 }
 
@@ -31,7 +29,5 @@ export async function getSingleProductBySlug(slug: string) {
   } catch (error) {
     console.error("Error fetching product:", error);
     throw error;
-  } finally {
-    await prisma.$disconnect();
   }
 }
