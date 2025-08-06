@@ -19,6 +19,7 @@ const eslintConfig = [
       "out/**",
       "build/**",
       "lib/generated/**",
+      "db/prisma/client/**",
     ],
   },
   ...compat.extends("next/core-web-vitals", "next/typescript"),
