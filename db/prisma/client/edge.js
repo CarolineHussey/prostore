@@ -139,7 +139,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\carol\\Projects\\prostore\\prisma\\@db\\prisma\\client",
+      "value": "C:\\Users\\carol\\Projects\\prostore\\db\\prisma\\client",
       "fromEnvVar": null
     },
     "config": {
@@ -160,9 +160,9 @@ const config = {
   },
   "relativeEnvPaths": {
     "rootEnvPath": null,
-    "schemaEnvPath": "../../../../.env"
+    "schemaEnvPath": "../../../.env"
   },
-  "relativePath": "../../..",
+  "relativePath": "../../../prisma",
   "clientVersion": "6.11.1",
   "engineVersion": "f40f79ec31188888a2e33acda0ecc8fd10a853a9",
   "datasourceNames": [
@@ -178,8 +178,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider        = \"prisma-client-js\"\n  output          = \"@db/prisma/client\"\n  previewFeatures = [\"driverAdapters\"] // An adapter so Prisma works smoothly with Neon in serverless environments `npm install @prisma/adapter-neon`\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Product {\n  id          String   @id @default(dbgenerated(\"gen_random_uuid()\")) @db.Uuid\n  name        String\n  slug        String   @unique(map: \"product_slug_idx\")\n  category    String\n  images      String[]\n  brand       String\n  description String\n  stock       Int\n  price       Decimal  @default(0.00) @db.Decimal(12, 2)\n  rating      Decimal  @default(0.00) @db.Decimal(3, 2)\n  numReviews  Int      @default(0)\n  isFeatured  Boolean  @default(false)\n  banner      String?\n  createdAt   DateTime @default(now()) @db.Timestamp(6)\n}\n",
-  "inlineSchemaHash": "872a6aa231ff83d693fd82d2e09624aeaf1ea871f7850cb257f8212b818e7d91",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider        = \"prisma-client-js\"\n  output          = \"../db/prisma/client\"\n  previewFeatures = [\"driverAdapters\"] // An adapter so Prisma works smoothly with Neon in serverless environments `npm install @prisma/adapter-neon`\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Product {\n  id          String   @id @default(dbgenerated(\"gen_random_uuid()\")) @db.Uuid\n  name        String\n  slug        String   @unique(map: \"product_slug_idx\")\n  category    String\n  images      String[]\n  brand       String\n  description String\n  stock       Int\n  price       Decimal  @default(0.00) @db.Decimal(12, 2)\n  rating      Decimal  @default(0.00) @db.Decimal(3, 2)\n  numReviews  Int      @default(0)\n  isFeatured  Boolean  @default(false)\n  banner      String?\n  createdAt   DateTime @default(now()) @db.Timestamp(6)\n}\n",
+  "inlineSchemaHash": "d9ad0fcb5ad028b998df647f576f9614b23eb215254723657967096b03cb2bf7",
   "copyEngine": true
 }
 config.dirname = '/'
