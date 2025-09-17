@@ -6,10 +6,12 @@ import { prisma } from "@/db/prisma";
 //get latest products
 export async function getLatestProducts() {
   try {
+    //returns a prisma object
     const data = await prisma.product.findMany({
       orderBy: { createdAt: "desc" },
       take: LATEST_PRODUCTS_LIMIT, // Limit the number of products returned
     });
+    //convert prisma object to plain object
     return convertToPlainObject(data);
   } catch (error) {
     console.error("Error fetching latest products:", error);
