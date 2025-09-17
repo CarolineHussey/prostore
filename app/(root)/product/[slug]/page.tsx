@@ -7,6 +7,7 @@ import ProductPrice from "@/components/shared/product/product-price";
 import ProductImages from "@/components/shared/product/product-images";
 
 const ProductDetailsPage = async (props: {
+  //type=promise
   params: Promise<{ slug: string }>;
 }) => {
   const { slug } = await props.params;

@@ -11,6 +11,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: {
     default: `${APP_NAME}`,
+    /* %s = page title*/
     template: `%s - ${APP_NAME}`,
   },
   description: `${APP_DESCRIPTION}`,

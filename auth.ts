@@ -23,45 +23,41 @@ export const config: NextAuthConfig = {
       },
       //credentials will come as an object from the sign-in form
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
-          throw new Error("Email and password are required");
-        } else {
-          const user = await prisma.user.findUnique({
-            where: { email: credentials.email as string },
-          });
+        if (credentials == null) return null;
 
-          if (!user) {
-            throw new Error("No user found with the provided email");
-          }
+        const user = await prisma.user.findUnique({
+          //where user.email matches credentials.email
+          where: { email: credentials.email as string },
+        });
 
-          if (!user.password) {
-            throw new Error("User does not have a password set");
-          }
+        //if user exists and has a password
+        if (user && user.password) {
+          //compare the password from the form with the hashed password in the db
           const isValidPassword = compareSync(
             credentials.password as string,
             user.password
           );
 
-          if (!isValidPassword) {
-            throw new Error("Invalid password");
+          if (isValidPassword) {
+            return {
+              id: user.id,
+              email: user.email,
+              name: user.name,
+              role: user.role,
+            };
           }
-
-          return {
-            id: user.id,
-            email: user.email,
-            name: user.name,
-            role: user.role,
-          };
         }
+        //if user not found or password is invalid return null
+        return null;
       },
     }),
   ],
   callbacks: {
     async session({ session, user, trigger, token }: any) {
-      //set the user ID from the sub property from the JSON token
+      //set the user ID from the JSON token (user is stored in the JSON sub property)
       session.user.id = token.sub;
 
-      //if there is an update set the user Name
+      //if username update is triggered set the user Name in the session to the one provided
       if (trigger === "update" && user) {
         session.user.name = user.name;
       }
@@ -71,4 +67,6 @@ export const config: NextAuthConfig = {
   },
 };
 
+//signIn and signOut: server actions
+//handlers: route.ts
 export const { handlers, auth, signIn, signOut } = NextAuth(config);
