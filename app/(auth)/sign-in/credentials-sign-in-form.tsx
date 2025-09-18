@@ -5,7 +5,7 @@ import { signInDefaultValues } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { signInWithCredentials } from "@/lib/actions/user.actions";
-import { use, useActionState } from "react";
+import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import { useSearchParams } from "next/navigation";
 
@@ -77,4 +77,3 @@ const CredentialsSignInForm = () => {
 };
 
 export default CredentialsSignInForm;
-<>Form</>;
