@@ -98,6 +98,4 @@ model Cart {
   createdAt     DateTime @default(now()) @db.Timestamp(6)
 
   user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId], name: "cart_user_id_idx")
 }

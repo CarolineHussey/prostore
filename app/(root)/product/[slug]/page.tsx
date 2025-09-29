@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import ProductPrice from "@/components/shared/product/product-price";
 import ProductImages from "@/components/shared/product/product-images";
 import AddToCart from "@/components/shared/product/add-to-cart";
+import { getMyCart } from "@/lib/actions/cart.actions";
 
 const ProductDetailsPage = async (props: {
   //type=promise
@@ -14,6 +15,10 @@ const ProductDetailsPage = async (props: {
   const product = await getSingleProductBySlug(slug);
 
   if (!product) notFound();
+
+  const cart = await getMyCart();
+  const validCart =
+    cart && "items" in cart && Array.isArray(cart.items) ? cart : undefined;
 
   return (
     <>
@@ -67,6 +72,7 @@ const ProductDetailsPage = async (props: {
                 {product.stock > 0 && (
                   <div className="flex-center">
                     <AddToCart
+                      cart={validCart}
                       item={{
                         productId: product.id,
                         name: product.name,
