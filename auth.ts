@@ -3,17 +3,16 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/db/prisma";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compareSync } from "bcrypt-ts-edge";
-import type { NextAuthConfig } from "next-auth";
 import { cookies } from "next/headers";
-import { NextResponse } from "next/server";
+import { authConfig } from "./auth.config";
 
-export const config: NextAuthConfig = {
+export const config = {
   pages: {
     signIn: "/sign-in",
     error: "/sign-in",
   },
   session: {
-    strategy: "jwt",
+    strategy: "jwt" as const,
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   adapter: PrismaAdapter(prisma),
@@ -56,6 +55,7 @@ export const config: NextAuthConfig = {
   ],
   callbacks: {
     //session callback
+    ...authConfig.callbacks,
     async session({ session, user, trigger, token }: any) {
       //set the user ID from the JSON token (user is stored in the JSON sub property)
       session.user.id = token.sub;
@@ -88,33 +88,6 @@ export const config: NextAuthConfig = {
         }
       }
       return token;
-    },
-
-    //middleware & sessionId management
-    //https://authjs.dev/getting-started/session-management/protecting-routes#middleware
-    //authorized will be called every time a user visits the site (and any auth route)
-    authorized({ request, auth }: any) {
-      //check for session cart cookie
-      if (!request.cookies.get("sessionCartId")) {
-        //set a session cart cookie if it doesn't exist
-        const sessionCartId = crypto.randomUUID();
-        //console.log(sessionCartId);
-
-        //create new request headers object and response
-        const newRequestHeaders = new Headers(request.headers);
-        const response = NextResponse.next({
-          request: {
-            headers: newRequestHeaders,
-          },
-        });
-        //set the response cookies with the newly generated sessionCartId
-        //title, value
-        response.cookies.set("sessionCartId", sessionCartId);
-
-        return response;
-      } else {
-        return true;
-      }
     },
   },
 };
