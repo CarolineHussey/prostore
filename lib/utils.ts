@@ -56,3 +56,21 @@ export function roundToTwoDecimalPlaces(value: number | string) {
     throw new Error("Value is not a number or string");
   }
 }
+
+//international currency converter
+const CURRENCY_CONVERTER = new Intl.NumberFormat("en-GB", {
+  currency: "GBP",
+  style: "currency",
+  minimumFractionDigits: 2,
+});
+
+//format currency
+export function formatCurrency(amount: number | string | null) {
+  if (typeof amount === "number") {
+    return CURRENCY_CONVERTER.format(amount);
+  } else if (typeof amount === "string") {
+    return CURRENCY_CONVERTER.format(Number(amount));
+  } else {
+    return "NaN";
+  }
+}
