@@ -18,9 +18,9 @@ export const signUpDefaultValues = {
 };
 
 export const shippingAddressDefaultValues = {
-  fullName: "John Doe",
-  streetAddress: "123 Main Street",
-  city: "OzTown",
-  postCode: "WX1",
-  country: "UK",
+  fullName: "",
+  streetAddress: "",
+  city: "",
+  postCode: "",
+  country: "",
 };
