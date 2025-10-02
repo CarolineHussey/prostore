@@ -76,6 +76,7 @@ export const config = {
       //assign user fields to the token
       if (user) {
         token.role = user.role;
+        token.id = user.id;
 
         //if user has no name then use the first part of the email
         if (user.name === "NO_NAME" && user.email) {
@@ -85,6 +86,27 @@ export const config = {
             where: { id: user.id },
             data: { name: token.name },
           });
+        }
+        if (trigger === "signIn" || trigger === "signUp") {
+          const cookiesObject = await cookies();
+          const sessionCartId = cookiesObject.get("sessionCartId")?.value;
+          if (sessionCartId) {
+            const sessionCart = await prisma.cart.findFirst({
+              where: { sessionCartId },
+            });
+            //delete existing user cart
+            if (sessionCart) {
+              await prisma.cart.deleteMany({
+                where: { userId: user.id },
+              });
+
+              //assign session cart to user cart
+              await prisma.cart.update({
+                where: { id: sessionCart.id },
+                data: { userId: user.id },
+              });
+            }
+          }
         }
       }
       return token;
