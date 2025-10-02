@@ -8,7 +8,24 @@ export const authConfig = {
     //https://authjs.dev/getting-started/session-management/protecting-routes#middleware
     //authorized will be called every time a user visits the site (and any auth route)
     authorized({ request, auth }) {
-      //check for session cart cookie
+      //Array of regex patterns of paths we want to protect
+      const protectedPaths = [
+        /\/shipping-address/,
+        /\/payment-method/,
+        /\/place-order/,
+        /\/profile/,
+        /\/user\/(.*)/,
+        /\/order\/(.*)/,
+        /\/admin/,
+      ];
+
+      //Get pathname from the request URL object
+      const { pathname } = request.nextUrl;
+
+      //check if user is not auth and accessing a protected path
+      if (!auth && protectedPaths.some((p) => p.test(pathname))) return false;
+
+      //check for sessionCart cookie
       if (!request.cookies.get("sessionCartId")) {
         //set a session cart cookie if it doesn't exist
         const sessionCartId = crypto.randomUUID();
