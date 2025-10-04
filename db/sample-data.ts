@@ -14,6 +14,12 @@ const sampleData = {
       password: hashSync("123456", 10), //(password, saltRounds)
       role: "user",
     },
+    {
+      name: "Test",
+      email: "test@test.com",
+      password: hashSync("123456", 10), //(password, saltRounds)
+      role: "user",
+    },
   ],
   products: [
     {

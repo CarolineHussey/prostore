@@ -1,7 +1,7 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "../db/prisma/client"
-  //previewFeatures = ["driverAdapters"] // depreciated // An adapter so Prisma works smoothly with Neon in serverless environments `npm install @prisma/adapter-neon`
+  provider        = "prisma-client-js"
+  output          = "../db/prisma/client"
+  previewFeatures = ["driverAdapters"] // depreciated // An adapter so Prisma works smoothly with Neon in serverless environments `npm install @prisma/adapter-neon`
 }
 
 datasource db {
