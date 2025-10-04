@@ -5,8 +5,9 @@ import { ShippingAddress } from "@/types";
 import ShippingAddressForm from "./shipping-address-form";
 import { getUserById } from "@/lib/actions/user.actions";
 import CheckoutSteps from "@/components/shared/checkout-steps";
+import { Metadata } from "next";
 
-export const metaData = {
+export const metadata: Metadata = {
   title: "Shipping Address",
 };
 const ShippingAddressPage = async () => {
