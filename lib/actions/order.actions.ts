@@ -100,7 +100,7 @@ export async function createOrder() {
 }
 
 //Get order by id
-export async function getorderById(orderId: string) {
+export async function getOrderById(orderId: string) {
   const data = await prisma.order.findFirst({
     where: {
       id: orderId,
