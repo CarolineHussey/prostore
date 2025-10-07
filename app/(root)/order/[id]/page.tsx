@@ -1,6 +1,8 @@
 import { Metadata } from "next";
-import { getorderById } from "@/lib/actions/order.actions";
+import { getOrderById } from "@/lib/actions/order.actions";
 import { notFound } from "next/navigation";
+import OrderDetailsTable from "./order-details-table";
+import { ShippingAddress } from "@/types";
 //import { ShippingAddress } from "@/types";
 
 export const metadata: Metadata = {
@@ -9,9 +11,16 @@ export const metadata: Metadata = {
 
 const OrderDetailsPage = async (props: { params: Promise<{ id: string }> }) => {
   const { id } = await props.params;
-  const order = await getorderById(id);
+  const order = await getOrderById(id);
   if (!order) notFound();
-  return <>Order Details {order.itemsPrice}</>;
+  return (
+    <OrderDetailsTable
+      order={{
+        ...order,
+        shippingAddress: order.shippingAddress as ShippingAddress,
+      }}
+    />
+  );
 };
 
 export default OrderDetailsPage;
