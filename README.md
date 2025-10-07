@@ -1,5 +1,7 @@
 <h2>Welcome to ProStore</h2>
-      <p>A site brought to you by</p>
+<p>A web app completed as Brad Traversy's 'Next.js Ecommerce 2025 - Shopping Platform From Scratch
+' course on Udemy. </p>
+      <p>This web app is build with the following tech</p>
       <ul>
         <li>
           <a
