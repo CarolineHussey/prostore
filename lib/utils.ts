@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import qs from "query-string";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -120,3 +121,23 @@ export const formatDateTime = (dateString: Date) => {
     timeOnly: formattedTime,
   };
 };
+
+//form the pagination links
+export function formUrlQuery({
+  params,
+  key,
+  value,
+}: {
+  params: string;
+  key: string; //the target query param (page)
+  value: string | null; //the value of the query param from the clickHandler (the page number we want to go to)
+}) {
+  const query = qs.parse(params); //returns current query params
+  query[key] = value; //sets the value to the page we want to go to (from clickHandler)
+
+  //stringifies the url from the pathname and the query obrained from qs.parse()
+  return qs.stringifyUrl(
+    { url: window.location.pathname, query },
+    { skipNull: true }
+  );
+}
