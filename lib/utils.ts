@@ -122,6 +122,12 @@ export const formatDateTime = (dateString: Date) => {
   };
 };
 
+const NUMBER_FORMATTER = new Intl.NumberFormat("en-UK");
+
+export function formatNumber(number: number) {
+  return NUMBER_FORMATTER.format(number);
+}
+
 //form the pagination links
 export function formUrlQuery({
   params,
