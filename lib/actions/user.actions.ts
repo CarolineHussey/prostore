@@ -173,7 +173,7 @@ export async function updateProfile(user: { name: string; email: string }) {
     });
     return {
       success: true,
-      message: "user updated successfully",
+      message: "User updated successfully",
     };
   } catch (error) {
     return { success: false, message: formatError(error) };
