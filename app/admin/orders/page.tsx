@@ -28,6 +28,7 @@ const AdminOrdersPage = async (props: {
 
   const orders = await getAllOrders({
     page: Number(page),
+    query: searchText || "",
   });
 
   return (
