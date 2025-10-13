@@ -5,6 +5,7 @@ import {
 } from "@/lib/actions/product.actions";
 import { LATEST_PRODUCTS_LIMIT } from "@/lib/constants";
 import ProductCarousel from "@/components/shared/product/product-carousel";
+import ViewAllProductsButton from "@/components/shared/view-all-products-button";
 
 const Home = async () => {
   const latestProducts = await getLatestProducts();
@@ -12,11 +13,13 @@ const Home = async () => {
   return (
     <>
       {featured.length > 0 && <ProductCarousel data={featured} />}
+
       <ProductList
         data={latestProducts}
         title="Featured Products"
         limit={LATEST_PRODUCTS_LIMIT}
       />
+      <ViewAllProductsButton />
     </>
   );
 };
