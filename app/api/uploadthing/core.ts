@@ -1,8 +1,12 @@
 import { createUploadthing, type FileRouter } from "uploadthing/next";
-import { UploadThingError } from "uploadthing/server";
+import { UploadThingError, UTApi } from "uploadthing/server";
 import { auth } from "@/auth";
 
+/* https://docs.uploadthing.com/getting-started/appdir */
+
 const f = createUploadthing();
+
+export const utapi = new UTApi();
 
 // FileRouter for your app, can contain multiple FileRoutes
 export const ourFileRouter = {
