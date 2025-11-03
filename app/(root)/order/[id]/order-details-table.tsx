@@ -28,15 +28,18 @@ import {
 import { toast } from "sonner";
 import { useTransition } from "react";
 import type { OnApproveData } from "@paypal/paypal-js";
+import StripePayment from "./stripe-payment";
 
 const OrderDetailsTable = ({
   order,
   paypalClientId,
   isAdmin,
+  stripeClientSecret,
 }: {
   order: Order;
   paypalClientId: string;
   isAdmin: boolean;
+  stripeClientSecret: null | string;
 }) => {
   const {
     shippingAddress,
@@ -241,7 +244,16 @@ const OrderDetailsTable = ({
                   </PayPalScriptProvider>
                 </div>
               )}
-
+              {/* STRIPE PAYMENT */}
+              {!isPaid && paymentMethod === "Stripe" && stripeClientSecret && (
+                <>
+                  <StripePayment
+                    priceInPence={Number(order.totalPrice) * 100}
+                    orderId={order.id}
+                    clientSecret={stripeClientSecret}
+                  />
+                </>
+              )}
               {/* CASH ON DELIVERY */}
               {isAdmin && !isPaid && paymentMethod === "CashOnDelivery" && (
                 <MarkAsPaidButton />
