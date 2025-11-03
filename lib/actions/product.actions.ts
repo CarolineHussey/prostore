@@ -6,6 +6,7 @@ import { prisma } from "@/db/prisma";
 import { insertProductSchema, updateProductSchema } from "../validators";
 import z from "zod";
 import { Prisma } from "@/db/prisma/client";
+import { utapi } from "@/app/api/uploadthing/core";
 
 //get latest products
 export async function getLatestProducts() {
@@ -142,7 +143,22 @@ export async function deleteProduct(id: string) {
       where: { id },
     });
     if (!productExists) throw new Error("Product not found");
+
+    //create an array of images to be deleted from uploadthing
+    const imagesToBeDeleted = [...productExists.images];
+
+    //check if the image isFeatured and has  banner image
+    if (productExists.isFeatured && productExists.banner) {
+      //if it does, add the banner image to the array of images to be deleted from uploadthing
+      imagesToBeDeleted.push(productExists.banner);
+    }
+
+    const imageKeys = imagesToBeDeleted.map((image) => image.split("/").pop());
+    await utapi.deleteFiles(imageKeys as string[]);
+
+    //delete product from database
     await prisma.product.delete({ where: { id } });
+
     revalidatePath("/admin/products");
     return { success: true, message: "Product was successfully deleted" };
   } catch (error) {
