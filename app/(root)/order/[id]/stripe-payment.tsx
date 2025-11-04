@@ -55,9 +55,9 @@ const StripePayment = ({
             error?.type === "card_error" ||
             error?.type === "validation_error"
           ) {
-            setErrorMessage(error?.message ?? "An unown error has occured");
+            setErrorMessage(error?.message ?? "An unkown error has occured");
           } else if (error) {
-            setErrorMessage("An unown error has occured");
+            setErrorMessage("An unkown error has occured");
           }
         })
         .finally(() => {
